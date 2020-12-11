@@ -179,36 +179,11 @@ const Header = (props) => {
           <a href="">
             <img src={chefIcon} className="logoimage" alt="" />
           </a>
-        {/*  <a style={{ marginTop: "-10px" }}>
-            <span className="exploreText">Explore</span>
-            <span className="plusText">Plus</span>
-            <img src={goldenStar} className="goldenStar" alt="" />
-          </a> */}
+     
         </div>
         {/* logo ends here */}
 
-        {/* search component */}
-        <div
-          style={{
-            padding: "0 10px",
-          }}
-        >
-        {/*  <div className="searchInputContainer">
-            <input
-              className="searchInput"
-              placeholder={"search for your favourite food"}
-            />
-            <div className="searchIconContainer">
-              <IoIosSearch
-                style={{
-                  color: "#2874f0",
-                }}
-              />
-            </div>
-          </div> */}
-        </div>
-        {/* search component ends here */}
-
+   
         {/* right side menu */}
         <div className="rightMenu">
           {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}

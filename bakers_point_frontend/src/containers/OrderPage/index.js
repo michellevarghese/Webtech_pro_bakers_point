@@ -25,14 +25,6 @@ function getOrderStatus(orderstatus) {
     }
 } 
 
-//   for (let i=0; i < orderstatus.length ; i++) {
-//     if(orderstatus[i].isCompleted)
-//     {
-//       check=check+1;
-//     }else{
-//       return orderstatus[check].type;
-//     }
-// } 
 }
 
 const OrderPage = (props) => {

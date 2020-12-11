@@ -10,10 +10,11 @@ import "./style.css";
 
 /**
  * @author
- * @function ClothingAndAccessories
+ * @function ProductsList
+ *
  **/
 
-const ClothingAndAccessories = (props) => {
+const ProductsList = (props) => {
   const product = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -53,4 +54,4 @@ const ClothingAndAccessories = (props) => {
   );
 };
 
-export default ClothingAndAccessories;
+export default ProductsList;

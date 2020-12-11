@@ -4,7 +4,6 @@ const slugify = require("slugify");
 const Category = require("../models/category");
 
 exports.createProduct = (req, res) => {
-  console.log(req);
   //res.status(200).json( { file: req.files, body: req.body } );
 
   const { name, price, description, category, quantity } = req.body;
@@ -53,22 +52,7 @@ exports.getProductsBySlug = (req, res) => {
           if (category.type) {
             if (products.length > 0) {
               res.status(200).json({
-                // products,
-                // productsByPrice: {
-                //   under5k: products.filter((product) => product.price <= 5000),
-                //   under10k: products.filter(
-                //     (product) => product.price > 5000 && product.price <= 10000
-                //   ),
-                //   under15k: products.filter(
-                //     (product) => product.price > 10000 && product.price <= 15000
-                //   ),
-                //   under20k: products.filter(
-                //     (product) => product.price > 15000 && product.price <= 20000
-                //   ),
-                //   under30k: products.filter(
-                //     (product) => product.price > 20000 && product.price <= 30000
-                //   ),
-                // },
+                products
               });
             }
           } else {

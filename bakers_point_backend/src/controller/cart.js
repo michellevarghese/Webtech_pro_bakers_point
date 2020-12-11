@@ -3,10 +3,10 @@ const Cart = require('../models/cart');
 
 function runUpdate(condition, updateData) {
     return new Promise((resolve, reject) => {
-      //you update code here
+      //update code here
  
      Cart.findOneAndUpdate(condition, updateData, { upsert: true })
-       .then(result => resolve())
+       .then(result => resolve(result))
        .catch(err => reject(err))
 
      });
@@ -25,7 +25,7 @@ exports.addItemToCart = (req, res) => {
 
             req.body.cartItems.forEach((cartItem) => {
                 const product = cartItem.product;
-                const item = cart.cartItems.find(c => c.product == product);
+                const item = cart.cartItems.find((c) => c.product == product);
                 let condition, update;
                 if(item){
                     condition = { "user": req.user._id, "cartItems.product": product };
@@ -35,6 +35,7 @@ exports.addItemToCart = (req, res) => {
                         }
                     }; 
                 }else{
+                    //if item doesnt already  exists in cart
                     condition = { user: req.user._id };
                     update = {
                         "$push": {
@@ -69,48 +70,6 @@ exports.addItemToCart = (req, res) => {
 
 
 
-
-
-  
-function runDelete(condition) {
-    return new Promise((resolve, reject) => {
-
-     Cart.findOneAndDelete(condition)
-       .then(result => resolve())
-       .catch(err => reject(err))
-
-     });
-}
-  
-
-exports.deleteItemFromCart = (req, res) => {
-
-
-    Cart.findOne({ user: req.user._id })
-    .exec((error, cart) => {
-        if(error) return res.status(400).json({ error });
-        if(cart){
-            //if cart already exists then update cart by quantity
-            let promiseArray = [];
-
-            req.body.cartItems.forEach((cartItem) => {
-                const product = cartItem.product;
-                const item = cart.cartItems.find(c => c.product == product);
-                let condition, update;
-                if(item){
-                    condition = { "user": req.user._id, "cartItems.product": product };
-                }
-                promiseArray.push(runDelete(condition, update))
-           
-            });
-            Promise.all(promiseArray)
-            .then(response => res.status(201).json({ response }))
-            .catch(error => res.status(400).json({error}))
-        }
-    });
-
-};
-
 exports.getCartItems = (req, res) => {
     //const { user } = req.body.payload;
     //if(user){
@@ -134,3 +93,24 @@ exports.getCartItems = (req, res) => {
         })
     //}
 }
+
+exports.removeCartItems = (req, res) => {
+    const { productId } = req.body.payload;
+    if (productId) {
+      Cart.update(
+        { user: req.user._id },
+        {
+          $pull: {
+            cartItems: {
+              product: productId,
+            },
+          },
+        }
+      ).exec((error, result) => {
+        if (error) return res.status(400).json({ error });
+        if (result) {
+          res.status(202).json({ result });
+        }
+      });
+    }
+  };

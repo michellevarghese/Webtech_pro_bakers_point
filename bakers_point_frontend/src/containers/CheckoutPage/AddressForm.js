@@ -109,7 +109,7 @@ const AddressForm = (props) => {
           </div>
           <div style={inputContainer}>
             <MaterialInput
-              label="10-digit mobile number"
+              label="Mobile number"
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
             />

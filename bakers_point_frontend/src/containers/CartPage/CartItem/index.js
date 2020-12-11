@@ -52,6 +52,8 @@ const CartItem = (props) => {
                     <input value={qty} readOnly />
                     <button onClick={onQuantityIncrement}>+</button>
                 </div>
+                <button className="cartActionBtn" 
+                onClick={() => props.onRemoveCartItem(_id)}>Remove</button>
             </div>
         </div>
     )

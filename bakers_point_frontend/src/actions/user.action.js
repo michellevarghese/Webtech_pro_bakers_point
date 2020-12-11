@@ -64,13 +64,6 @@ export const addOrder = (payload) => {
         dispatch({
           type: cartConstants.RESET_CART,
         });
-        // const {
-        //   address: { address },
-        // } = res.data;
-        // dispatch({
-        //   type: userConstants.ADD_USER_ADDRESS_SUCCESS,
-        //   payload: { address },
-        // });
       } else {
         const { error } = res.data;
         dispatch({

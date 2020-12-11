@@ -9,11 +9,7 @@ export const getProductsBySlug = (slug) => {
                 type: productConstants.GET_PRODUCTS_BY_SLUG,
                 payload: res.data
             });
-        } else {
-            // dispatch({
-            //     type: 
-            // })
-        }
+        } 
     }
 }
 
